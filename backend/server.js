@@ -1,6 +1,6 @@
-import express from "express";
-import bodyParser from "body-parser";
-import {
+const express = require ("express");
+
+const {
   readTeachers,
   readStudents,
   addStudent,
@@ -12,7 +12,7 @@ import {
   updateStudent,
   updateTeacher,
   dbinitialize
-} from "./database.js";
+} = require ("./database.js");
 
 const app = express();
 const bodyParser = require  ("body-parser");
@@ -106,7 +106,7 @@ app.post("/addStudent", async function (req, res) {
     reqBody.id,
     reqBody.name,
     reqBody.age,
-    reqBody.religion
+    reqBody.hometown
   );
 
   res.setHeader("Content-Type", "application/json");
@@ -129,7 +129,7 @@ app.post("/editStudent", async function (req, res) {
   console.log(
     "Request received to update Student. Req body: " + JSON.stringify(reqBody)
   );
-  let data = await updateStudent(reqBody.name,reqBody.age,reqBody.religion,reqBody.id);
+  let data = await updateStudent(reqBody.name,reqBody.age,reqBody.hometown,reqBody.id);
 
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(data));
